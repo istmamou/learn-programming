@@ -1,528 +1,285 @@
-# Apprendre Git en créant un objet de référence SQL
+# Apprendre la Programmation avec le langage C
 
+# Motivation
+Dans ce cours, nous n'avons pas pour ambition d'être exhaustif. Notre ambition est de démontrer par la pratique ce que vous pouvez accomplir lorsque vous maîtrisez les bases de la programmation. Comme exemple, nous allons beaucoup pratiquer et acquérir des connaissances qui vous permettront de vous débrouiller dans les petits comme les grands projets.
 
-| [Téléchargez le powerpoint](/learn-git-powerpoint.pdf) | [Téléchargez le TP](/learn-git-tp.pdf) |
+Notre approche ayant été comprise, à l'issue de ce cours, vous serez en mesure de programmer en quelques minutes:
 
-## Qu'est-ce que c'est Git ?
-* Git est un outil opensource.
-* Git est un système de versioning
-* Git est une référence dans le domaine
-* Git, c'est la vie !
+* une simple calculatrice
+* une application pour dire bonjour
+* un convertisseur de devises
+* un jeu de devinette (2 ways) (avec et sans triche)
 
-## Setup
-L'installation de Git ne demande que peu d'efforts, après c'est tout un monde que vous avez dans votre ordinateur à travers lequel vous pouvez voyager.
+Et de résoudre des défis.
+Nous comptons mettre en place pour le dernier jour de formation, 3 défis au cours desquels vous avez la possibilité de mettre vous-même en pratique les connaissances que vous aurez apprises.
+Attention, les défis ne se limiterons pas qu'aux seules notions qu'on aura apprises.
+Cependant, avec un petit peu de logique et de perspicacité mais aussi d'originalité, vous y parviendrez pour sûr !
 
-N'oubliez pas de configurer votre identité pour vos futurs commits:
+En espérant que ces raisons vous motivent assez, rendez-vous à la prochaine section où nous lirons pourquoi vous avez besoin d'comprendre le langage C.
 
-```powershell
-git config --global user.name <nom>
-git config --global user.email <email>
-```
+# Pourquoi apprendre le langage C ?
+Le langage C est un langage bas niveau comparé à beaucoup d'autres langages. 
+Bas niveau signifie que c'est un langage très proche du niveau des composants électroniques.
+L'avantage de ça c'est que vous avez un accès à des techniques qui peuvent vous permettre d'optimiser l'utilisation de la mémoire.
+Nous parlerons de la mémoire de la machine à temps voulu mais pour l'instant, retenons juste que le langage C est un bon début pour mieux appréhender le fonctionnement de la mémoire aussi son fonctionnement. D'un autre côté, il vous permet très vite de prendre les bonnes habitudes car en programmation ce n'est pas toujours celui qui code le plus qui code de mieux.
 
-## Vocabulaire
+# Les bases
+> Toute chose part de quelque part.
 
-* Repository
-* Branch
-* Commit
-* Pull Request
+La programmation est un super pouvoir qui vous donne la capacité de donner vie à vos idées les plus incroyables. Il est vraiment interessant de jeter un coup d'oeil sur les réalisations technologiques qui ont été faites jusqu'ici, partant des mathématiques aux algorithmes jusqu'aux intelligences artificielles dont on parle beaucoup ces derniers jours.
 
+Il s'agit d'un très vaste univers où la base réside à la compréhension du comment la machine fait pour prendre des instructions et les exécuter.
 
-## Créons notre référence SQL
+L'ordinateur est un assemblage de circuits électroniques où les informations circulent à l'état binaire. Il est une super calculatrice qui est en mesure d'exécuter des instructions élémentaires à une vitesse de plus de 3 milliars par secondes. C'est la grande révolution même si ça n'a pas toujours été le cas.
 
-### 1. Créer un dossier
+Avant la réalisation de n'importe quel programme informatique, il est très primordial de se poser un certain nombre de questions:
 
-Créer un dossier `learn_sql` dans votre repertoire personnel et déplacez-vous dedans:
+* Qu'est-ce qu'on me demande de faire ?
+* Quelles seront les entrées de mon programme ?
+* Quelles seront les sorties de mon programme ?
+* Quelles étapes élementaires dois-je suivre pour partir des données d'entrée aux données de sortie ?
+* Quels sont les outils que je dois utiliser ?
+* etc.
 
-```powershel
-cd ~
-mkdir learn_sql
-cd learn_sql
-```
+Toutes ces questions bien avant d'avoir écrit n'importe quelle ligne de code. Mais cependant ces questions relèvent de la plus grande importante car les réponses-là vous permettront de mieux orienter les recherches (potentielles) que vous allez mener, les notions que vous allez aborder lors de la conception, etc.
 
-### 2. Initialisez un repository
+Après maintenant vous vous posez pour réaliser comme dit tantôt les étapes élementaires qui doivent mener des données d'entrées aux données de sortie.
 
-Dans votre dossier `learn_sql`, exécuter la commande
+L'ensemble des étapes qui vous permettent de passer de l'entrée à la sortie sont appelées: **algorithme**.
 
-```powershel
-git init
-```
+> Pour reformuler, nous dirons qu'un **algorithme** est un ensemble d'étapes, d'instructions qui permettent de réaliser un objectif.
 
-Cette commande initialise un repository dans le dossier courant. Cela permet de traquer les changements qui s'opèrent dans ce dossier à partir de l'intant.
+Exemple d'algorithme:
 
-Pour vérifier, exécutez la commande:
+* Une recette de cuisine
+* La valeur absolue
+* L'algorithme de division euclidienne
+* L'algorithme de tri à bulles
+* etc.
 
-```powershell
-git status
-```
+Tous ces algorithmes ont un ensemble d'étapes qui une fois exécutées vous mênent un objectif.
 
-Cette commmande permet de recenser les fichiers modifiés non encore versionnés.
+Nous allons dans ce cours apprendre comment représenter un algorithme sous forme de pseudo-code, algorigramme et l'exécuter en langage C.
+Pour une bonne compréhension, nous vous demandons donc d'avoir une installation minimale.
 
-### 3. Notre premier commit
+* Editeur de texte (obligatoire): pour saisir le code source de nos programmes en langage C.
+* Compilateur (obligatoire): qui est en mesure de traduire le code source en code machine (binaire).
+* Déboggeur (facultatif): qui permet de débogger notre code source afin de relever les erreurs.
 
-Nous allons commencer par créer un fichier `README.md`.
 
-```powershell
-touch README.md
-```
+Grâce à un Environnement de Développement Integré (Integrated Development Evironment: IDE), nous avons tous ces composants en un seul.
+Nous allons donc télécharger et installer l'IDE Code::Blocks muni du compilateur du langage C afin de nous faciliter les tâches.
 
-Vérifions l'état de notre repository:
+Attention à prendre le fichier qui contient mingw dans le nom car il est muni du compilateur.
 
-```powershell
-git status
-```
+> **Lien:** https://www.codeblocks.org/downloads/binaries/
 
-Nous remarquons que le fichier `README.md` est présent dans la partie des fichiers **untracked**.
+## Un premier projet
 
-Dans le fichier `README.md`, nous allons ajouter la ligne `# Référence SQL`.
+Le premier projet que l'on va exécuter est d'afficher un message de bienvenue. En langage C on le peut le faire à l'aide de ce snippet:
 
-Vérifions encore une fois l'état de notre repository:
+```c
+#include <stdio.h>
+#include <stdlib.h>
 
-```powershell
-git status
-```
-
-Toujours la même chose !
-
-Nous allons maintenant enregistrer le fichier dans notre système de versionning:
-
-Tout d'abord, on va l'ajouter en attente:
-
-```powershell
-git add README.md
-```
-
-Vérifions l'état de notre repository:
-
-```powershell
-git status
-```
-
-Là nous remarquons que le fichier `README.md` est passé en attente, on dit aussi en **staging**.
-
-Nous allons enregistrer le changement maintenant:
-
-```powershell
-git commit -m "feat: ajout fichier readme"
-```
-
-L'option `-m` nous permet de donner le message de commit.
-
-Il est recommandé de choisir des messages clairs et concis. On les préfixe très souvent par `feat`, `fix`, etc.
-
-Maintenant que nous avons enregistré le fichier, vérifions l'état de notre repertoire:
-
-
-```powershell
-git status
-```
-
-Il semblerait que ça ait marché et qu'il n'y a plus rien à *commit*.
-
-Listons les commit:
-
-```powershell
-git log
-```
-
-Cette commande permet de voir l'historique des modification (des commits). Ou en clair, on peut apercevoir les messages laissés par les contributeurs du projet. Pour l'instant vous travaillez seul.
-
-### 4. Notre première *feature branche*
-
-Nous voulons continuer à créer notre référence SQL qu'on partagera à la communauté.
-
-Pour cela nous commençons par créer une branche.
-
-```powershell
-git branch feat/ajout-fichier-reference
-```
-
-Listons les branches:
-
-```powershell
-git branch
-```
-
-Nous pouvons maintenant voir qu'il existe deux branches: `main` et `feat/ajout-fichier-reference`. Nous remarquons `*` devant la branche `main` cela signifie que c'est la branche courante.
-
-Nous allons changer de branche:
-
-```powershell
-git checkout feat/ajout-fichier-reference
-```
-
-On peut vérifier que la branche a changé avec la même commande que tout à l'heure:
-```powershell
-git branch
-```
-
-Cette fois-ci la branche `feat/ajout-fichier-reference` est précédée par une **étoile**.
-
-Nous allons afficher les logs:
-
-```powershell
-git log
-```
-
-Nous voyons le même historique que celui de la branche main.
-
-> **Note:** La commande `git branch <nom branche>` permet de cloner la branche courante.
-
-Créons un fichier `sql_reference.json`.
-
-```powershell
-touch sql_reference.json
-```
-
-Dans ce fichier nous allons ajouter les lignes suivantes:
-
-```js
+int main(int argc, char* argv[]) 
 {
-    "database": {
-        "create": "CREATE DATABASE database_name;"
-    }
+    printf("Hello GDSC !\n");
+    return 0;
 }
 ```
 
-Vérifier l'état du repertoire, nous avons un nouveau fichier à enregistrer.
-
-```powershell
-git status
-```
-
-Ajoutez-le en *staging*.
-
-```powershell
-git add sql_reference.json
-```
-
-Vérifier l'état de nouveau.
-
-```powershell
-git status
-```
-
-Enregistrer les changement à travers un message de commit: `feat: ajout fichier de reference`
-
-```
-git commit -m "feat: ajout fichier de reference"
-```
-
-Vérifions l'état du dossier et consultons les logs. Nous remarquons deux messages de logs dans la branche courante (`feat/ajout-fichier-reference`)
-
-Revenons à la branche `main`:
-
-```powershell
-git checkout main
-```
-
-Vérifions l'historique de cette branche. Vous avez noté la différence ?
-
-> **Note:** Les branches sont puissantes car elles nous permettent de gérer deux historiques différents. Autrement, on peut travailler sur des features séparements.
-
-Fusionnons la branche `feat/ajout-fichier-reference` à la branche `main`:
-
-```
-git merge feat/ajout-fichier-reference
-```
-
-Vérifions l'historique et aussi le contenu du fichier !
-
-Nous allons maintenant supprimer la branche qu'on vient de fusionner.
-
-```powershell
-git branch -d feat/ajout-fichier-references
-```
-
-Voici ainsi présentés les fonctionnalités principales de l'outil git:
-
-* Les branches
-* Les commits
-
-___
-
-### 5. La suite de notre référence
-
-Nous allons continuer à ajouter des commandes dans notre objet de référence. 
-
-Tout d'abord nous allons créer une nouvelle branch `feat/ajout-reference-suppression-bdd`.
-
-```powershell
-git branch feat/ajout-reference-suppression-bdd
-git checkout feat/ajout-reference-suppression-bdd
-```
-
-ou alors
-
-```powershell
-git checkout -b feat/ajout-reference-suppression-bdd
-```
-
-> **Note:** Les deux produisent le même résultat.
-
-Ajoutons ensuite une entrée `drop` dans la partie database qui donne la commande pour supprimer une base de données.
-
-Au final, nous devrions avoir un contenu identique que ce qui suit:
-
-```js
-{
-    "database": {
-        "create": "CREATE DATABASE database_name;",
-        "drop": "DROP DATABASE database_name;"
+Il y a quelques points à noter sur ce programme:
+* Les deux premières lignes diaboliques obligatoires bizarres et qui font un excellent travail, on appelle **directives au préprocesseur**:
+    ```c
+    #include <stdio.h>
+    #include <stdlib.h>
+    ```
+    
+* La porte d'entrée d'un programme écrit en langage C est la fonction `main`. Autrement dit, pour que votre programme soit fonctionnel, vous devez avoir la fonction `main`:
+    ```c
+    int main(int argc, char* argv[])
+    {
+        // instructions
     }
+    ```
+* Une fonction est juste un ensemble d'instructions à exécuter pour un but bien définit.
+* La fonction `main` contiendra donc l'ensemble des instructions que notre programme devra exécuter pour résoudre un cas d'utilisation.
+* Pour ce programme, nous avons fait appel à une instruction particulière qui permet d'afficher un message à la sortie standart (litt., la console). Il s'agit de la fonction `printf`:
+    ```c
+    printf("Hello GDSC");
+    ```
+* La fonction `printf` prend comme paramètre le message à afficher à l'utilisateur.
+* Pour continuer, chaque instruction se termine d'un point-virgule. Donc dans notre fonction `main`, nous avons deux instructions.
+* Ce qui nous mène au dernier point, l'instruction :
+    ```c
+    return 0;
+    ```
+    permet de fermer normalement le programme après avoir exécuté toutes les instructions nécessaires.
+
+Prenez le temps de vous approprier les lignes ci-dessus car nous utiliserons ces notions plusieurs fois dans le cours !
+
+### Exercices
+* Modifier le programme pour qu'il afficher votre nom.
+* Modifier le programme pour qu'il affiche le message: `"Bonjour, j'apprends la programmation avec le langage C."`
+* Modifier le programme pour afficher cette fois-ci : 
+
+    ```
+    Bonjour, je m'appelle <votre nom>.
+    J'apprends la programmation avec le langage C.
+    ```
+
+## Les variables et la mémoire
+
+La programmation commence à devenir assez intéressante lorsque l'on utilise les variables et les notions que l'on va apprendre après.
+
+S'il faut résumer cette partie, nous dirons:
+
+* Une **variable** est une location mémoire pour stocker une valeur à réutiliser.
+* Une **variable** occupe donc de l'espace mémoire.
+* Une **variable** a une addresse (emplacement).
+* La seule façon pour un programme de retenir l'information est avec les **variables**. Sinon le programme serait bien embêté.
+
+Il devient donc important de noter comment on crée une variable.
+
+C'est là que ça devient intéressant car pour créer une variable on suit le même schéma suivant maintenant le **type de la variable** à créer.
+
+### Les types de variables
+
+Entendez par type de variable, la nature de l'information à traiter: en informatique nous avons:
+
+* Les caractères comme la lettre `a` ou même le chiffre `4`.
+* Les entiers tels que `12` ou même `600`.
+* Les nombres à virgule comme `18.4`.
+* Les chaines de caractères comme `GDSC` ou `Amadou`.
+
+Mais pour l'instant on se concentrera sur les 3 premiers.
+
+De façon générale pour déclarer (ou créer) une variable, on utilise la syntaxe suivante:
+
+```
+<type variable> <nom variable> [ = <valeur initiale>];
+```
+Pour vous aider, servez-vous de ce tableau:
+
+||Type|Code format|Exemple|
+|-|-|-|-|
+|Entier|`int`|`%d`|`int superficie = 245857;`|
+|Caractère|`char`|`%c`|`char reponse = 'o'; `|
+|Décimal|`float`|`%f`|`float pi = 3.14159;`|
+
+Pour ne pas trop surcharger, nous allons nous contenter de ces types de variables, mais il est essentiel de garder en tête qu'il y en a bien d'autres et que leur utilisation peut être opportune des fois.
+
+Maintenant nous savons déclarer une variable, nous allons les afficher à la sortie standart (écran).
+
+Notez ce petit programme:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char* argv[])
+{
+    // Déclaration des variables
+    int superficie = 245857;
+    char reponse = '0';
+    float pi = 3.14159;
+
+    // Affichage à la console
+    printf("%d", superficie);
+    printf("%c", reponse);
+    printf("%f", pi);
 }
 ```
 
-Vérifions l'état de notre répertoire.
-
-```powershell
-git status
+Mais ici tout est sur la même ligne, on peut régler ça:
+```c
+printf("%d\n", superficie);
+printf("%c\n", reponse);
+printf("%f\n", pi);
 ```
 
-Nous remarquons qu'un fichier a été modifié.
+On peut même mettre des phrases explicatives devant les valeurs:
 
-Nous pouvons aussi utiliser la commande diff pour lister les changements apportés:
-
-```powershell
-git diff
+```c
+printf("La superficie de la Guinee est de %d kilometres carrees.\n", superficie);
+printf("La reponse de l'utilisateur est: '%c'.\n", reponse);
+printf("La valeur de PI est de %f.\n", pi);
 ```
 
-Ajoutons le fichier avec le message: `feat: ajout reference suppression base de données`
+## Faire des calculs
 
-```powershell
-git add sql_reference.json
-git commit -m "feat: ajout reference suppression base de données"
-```
+Sans surprise, il est possible de faire des opérations mathématiques avec le langage C.
 
-Vous pouvez lister les logs
+Pour cela, nous utilisons les opérateurs mathématique à savoir l'addition, la soustraction, la multiplication et la division.
 
-> **Note:** S'il y a beaucoup de logs, tout le contenu ne s'affiche pas en une fois, vous pouvez naviguer avec les touches de direction. Appuyez sur la touche **Q** pour sortir.
+Il existe une opération supplémentaire appelée modulo qui permet d'obtenir le reste de la division entière.
 
-Aussi revenons à la branche principale `main`.
+Dans le tableau ci-dessous nous récapitulons:
 
-```powershell
-git checkout main
-```
+|Opération|Symbole|Exemple|
+|-|-|-|
+|Addition|`+`|`printf('%d', 1 + 7);`|
+|Soustraction|`-`|`printf('%f', 10.5 - 10);`|
+|Multiplication|`*`|`printf('%f', 2 * 3.14159 * 5);`|
+|Division|`/`|`printf('%d', 10 / 3);`|
+|Modulo|`%`|`printf('%d', 17 % 7);`|
 
-Nous allons fusionner les changements qu'on a ajoutés sur la branche précédente puis la supprimer.
+Dans les opérations ci-dessus, nous avons affiché directement la valeur sans utilisation de variables.
 
-```powershell
-git merge feat/ajout-reference-suppression-bdd
-git log
-git branch -d feat/ajout-reference-suppression-bdd
-git branch
-```
+Mais là où ça devient intéressant c'est quand on commence à stocker les variables pour les réutiliser.
 
-Nous allons maintenant créer une branche pour ajouter quelques références sur les tables:
+Pour exemple, prenez ce programme qui calcule et affiche le périmètre d'un cercle.
 
-Ajoutons une branche `feat/ajout-references-table`
+```c
+#include <stdio.h>
+#include <stdlib.h>
 
-```powershell
-git checkout -b feat/ajout-references-table
-```
-
-Rajoutons dans notre référence une entrée sur `table` contenant deux sous-entrées (`create` et `drop`)
-
-```js
+int main(int argc, char* argv[])
 {
-    "database": {
-        // ... ancien contenu
-    },
-    "table": {
-        "create": "CREATE TABLE table_name;",
-        "drop": "DROP TABLE table_name;"
-    }
+    printf("Ce programme calcule le perimetre d'un cercle");
+
+    float rayon = 5, PI = 3.14159, perimetre = 0;
+    perimetre = 2 * PI * rayon;
+    printf("Pour un cercle de rayon R = %f\n", r);
+    printf("Le perimetre vaut : %f.\n", perimetre)
+    
+    return 0;
 }
 ```
 
-Enregistrons ces changements avec le message: `feat: ajout references table`.
+Dans ce programme on utilise un principe très connu, appelé **affectation**.
 
-```powershell
-git status
-git diff # pour voir les changements apportés aux fichiers
-git add sql_reference.sql
-git status
-git commit -m "feat: ajout references table"
-git status
-git log --oneline
-```
+Pour simplifier, lorsqu'on modifie une variable en mémoire pour y mettre une autre valeur, alors on dit qu'on a fait une affectation.
 
-> **Note:** Le flag `--oneline` permet de voir les logs de façon plus condensée.
+### A vous maintenant
 
-Fusionnons ces changements à la branche principale `main`.
+* Mamadou possède 5 mangues et Binta possède 8 oranges. Ils décident d'échanger pour que chacun donne à l'autre ses fruits. En modifiant ce programme, pouvez vous faire en sorte que à la fin Mamadou possède 8 oranges et Binta 5 mangues ?
+    ```c
+    #include <stdio.h>
+    #include <stdlib.h>
 
-```powershell
-git checkout main
-git log --oneline # pour vérifier l'état actuel
-git merge feat/ajout-references-table
-git log --oneline
-git branch -d feat/ajout-references-table
-git branch # pour s'assurer de la suppression de la branche
-```
+    int main(int argc, char* argv[])
+    {
+        int mamadou = 5, binta = 8;
+        printf("Mamadou: %d mangues | Binta: %d oranges\n", mamadou, binta);
+        // Faites l'échange ici
+        
 
-Voilà ça !
-
-Maintenant nous allons voir comment gérer plusieurs branches à la fois !
-
-Créez une branche `feat/ajout-reference-insertion-ligne`
-
-Ajoutez une entrée `row` dans le fichier de référence contenant une sous-entrée `insert` pour insérer une entrée dans une table:
-
-```js
-{
-    "database" : { 
-        // ... ancien contenu
-    },
-    "column": {
-        // ... ancien contenu
-    },
-    "row": {
-        "insert": "INSERT INTO table_name(columns_name) VALUES(column_values);"
+        printf("Mamadou: %d oranges | Binta: %d mangues\n", mamadou, binta);
+        return 0;
     }
-}
-```
+    ```
 
-Committez les changements de la branche `feat/ajout-reference-insertion-ligne` avec le message: `feat: ajout reference insertion ligne`.
-
-Revenez sur la branche `main`.
-
-Créez une autre branche `feat/ajout-references-colonne`.
-
-Dans cette branche, nous allons gérer les commandes en lien aux colonnes.
-
-Commençons par ajouter une entrée `column` dans le fichier de référence contenant une sous-entrée `create` contenant la requête SQL pour créer une colonne dans une table `ALTER TABLE table_name ADD COLUMN column_name;`.
-
-```js
-{
-    "database" : { 
-        // ... ancien contenu
-    },
-    "column": {
-        // ... ancien contenu
-    },
-    "column": {
-        "create": "ALTER TABLE table_name ADD COLUMN column_name;"
-    }
-}
-```
-
-Committons ces modifications avec le message: `feat: ajout reference creation colonne`.
-
-Revenons à la branche main pour effectuer une fusion de la branche `feat/ajout-reference-insertion-ligne`.
-
-Supprimons cette branch après fusion.
-
-Positionnons-nous maintenant au niveau de la branche `feat/ajout-references-colonne`.
-
-> **Note:** Ceci arrive très souvent où nous devrions récupérer les modifications d'autres personnes. On effectue ce qu'on appelle **rebase** de notre branche.
-
-Essayons:
-
-```powershell
-git rebase main
-```
-
-Et hop !
-
-En cas de conflits, nous devons les corriger puis mettre en attente les fichiers concernés.
-
-```powershell
-git status
-git add sql_reference.sql
-```
-
-Avant ensuite de continuer notre rebase.
-
-```powershell
-git rebase --continue
-```
-
-Nous allons ensuite ajouter une sous-entrée `rename` sur la branche courante `feat/ajout-references-colonne` avec le contenu: `ALTER TABLE table_name RENAME COLUMN column_name TO new_name;`
-
-Voici à quoi devrait ressembler l'entrée `column`:
-
-```js
-{
-    // ... ancien contenu
-    "column": {
-        "create": "ALTER TABLE table_name ADD COLUMN column_name;",
-        "rename": "ALTER TABLE table_name RENAME COLUMN column_name TO new_name;"
-    }
-}
-```
-
-Puis committez les changements avec le message: `feat: ajout référence mise à jour colonne`
-
-Vous allez corriger la requête de création de table.
-
-Pour cela, depuis la branche `main` créer une branche `fix/create-table-reference` et positionnez-vous dedans puis ajoutez des parenthèses après le nom de la table et commitez le changement avec le message `fix: correction référence create table`.
-
-Revenez à la branche main puis faites un merge de la branche `fix/create-table-reference` avant de supprimer cette branche.
-
-Dans la branche `feat/ajout-references-colonne`, on fait un **rebase**.
-
-Positionnez-vous sur la branche main puis créez une branche `fix/ajout-references-rename-manquantes` où nous allons ajouter les sous-entrées `rename` de `database` et `table`:
-
-```js
-{
-    "database": {
-        // ... ancien contenu
-        "rename": "ALTER DATABASE database_name RENAME TO new_name;"
-    }, 
-    "table": {
-        // ... ancien contenu
-        "rename": "ALTER TABLE table_name RENAME TO new_name;"
-    }
-}
-```
-
-Committez les changements ensuite avec le message: `fix: ajout references rename manquantes`.
-
-Ensuite on revient dans la branche `main` et on fait un merge avant de supprimer la branche `fix`.
-
-Finalement, dans la branche `feat/ajout-references-colonne` on fait de nouveau un **rebase** en corrigeant les conflits éventuels ! (Il ne devrait pas y en avoir.)
+* Vous devez transporter N = 174 casiers de jus d'un magasin grossiste qui se trouve en ville jusqu'en campagne. Pour cela vous utilisez une camionnette qui peut contenir au maximum M = 40 casiers. Il faut 5minutes pour faire le trajet aller-retour entre le magasin et la camionnette. 
+    * Quelle est la durée minimale qu'il reste pour remplir le camion après avoir embarqué 28 casiers dans la camionnette ?
+    * Combien de casiers seront transportés lors du dernier voyage.
+    * Même question pour un couple (N,M) = (1281, 100) et (N,M) = (111, 20)
 
 
-### 6. Alors dernier défi
-
-Une nouvelle branche `fix/ajout-references-lignes-manquantes` où il sera ajouté à `row` les sous-entrées `update`, `select`, `delete` dont les valeurs sont les requêtes SQL pour effectuer les actions correspondantes. Vous devriez avoir un contenu pareil:
-
-```js
-{
-    "row": {
-        // ... ancien contenu
-        "update": "UPDATE table_name SET column_name = new_value WHERE conditions;",
-        "select": "SELECT columns_name FROM table_name;",
-        "delete": "DELETE FROM table_name WHERE conditions;"
-    }
-}
-```
-
-Commit les changements sur cette branche avec le message `fix: ajout references lignes manquantes` et se positionner sur `main` afin de fusionner cette branche.
-
-Se positionner ensuite sur la branche `feat/ajout-references-colonne`.
-
-Ajouter une sous-entrée `drop` à `column` contenant la requête pour supprimer une colonne: `ALTER TABLE table_name DROP COLUMN column_name;`.
-
-Commit les changements apportés par le message `feat: ajout reference suppression colonne` et vérifier avec `git log --oneline`.
-
-Faire un rebase en utilisant la branche main et corriger les conflits si il y en a.
-
-Se positionner sur la branche `main` et fusionner la branche `feat/ajout-references-colonne` à la branche courante.
-
-Supprimer toutes les branches excepté main.
-
-Afficher les logs.
-
-Afficher les logs.
-
-Vérifier l'état du repertoire courant.
-
-## Notes de fin
-
-Cet exercice est un bon début pour commencer à utiliser Git certes mais il vous faut maintenir le rythme en enchainant l'utilisation de ces notions dans vos projets personnels.
-
-Et rétenez une chose, c'est en forgeant que l'on devient forgeron. Prenez les bonnes habitudes très vite dans vos projets et cela vous évitera de revenir en arrière très souvent.
-
----
-
-<small><a href="mailto:moustaphaotf@gmail.com">Mamadou Moustapha Diallo</a>, Lead <a href="https://gdsc.community.dev/institut-superieur-de-technologie-de-mamou/">GDSC IST Mamou</a> - MARS 2024</small>
+## Les conditions
+## Les boucles
+# Notions avancées
+## Les fonctions
+## Les tableaux
+## Les pointeurs
