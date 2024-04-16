@@ -219,11 +219,11 @@ Dans le tableau ci-dessous nous récapitulons:
 
 |Opération|Symbole|Exemple|
 |-|-|-|
-|Addition|`+`|`printf('%d', 1 + 7);`|
-|Soustraction|`-`|`printf('%f', 10.5 - 10);`|
-|Multiplication|`*`|`printf('%f', 2 * 3.14159 * 5);`|
-|Division|`/`|`printf('%d', 10 / 3);`|
-|Modulo|`%`|`printf('%d', 17 % 7);`|
+|Addition|`+`|`printf("%d", 1 + 7);`|
+|Soustraction|`-`|`printf("%f", 10.5 - 10);`|
+|Multiplication|`*`|`printf("%f", 2 * 3.14159 * 5);`|
+|Division|`/`|`printf("%d", 10 / 3);`|
+|Modulo|`%`|`printf("%d", 17 % 7);`|
 
 Dans les opérations ci-dessus, nous avons affiché directement la valeur sans utilisation de variables.
 
@@ -276,9 +276,272 @@ Pour simplifier, lorsqu'on modifie une variable en mémoire pour y mettre une au
     * Combien de casiers seront transportés lors du dernier voyage.
     * Même question pour un couple (N,M) = (1281, 100) et (N,M) = (111, 20)
 
+    ```c
+    #include <stdio.h>
+    #include <stdlib.h>
+
+    int main(int argc, char* argv[])
+    {
+        int N = 174, M = 40;
+        int dureeMin = 0, dernierVoyage = 0;
+
+        printf("La duree minimale qui reste : %d.\n", dureeMin);
+        printf("Le nombre de casiers du dernier voyage : %d.\n", dernierVoyage);
+        return 0;
+    }
+    ```
 
 ## Les conditions
+
+Les conditions représente un moyen de laisser le programme l'autonomie de faire certains choix en fonction des critères qu'on lui impose.
+
+Pour pouvoir établir des condition, nous devons comprendre les opérateurs de comparaison et les opérateurs logiques.
+
+### Opérateurs de comparaision
+
+Les opérateurs de comparaison permettent de comparer deux valeurs (couramment une variable à une autre ou alors une variable à une valeur). Et le résultat obtenu est un résultat binaire: `vrai` ou `faux`, symbolisés par `1` et `0` respectivement.
+
+Ce tableau récapitule l'essentiel des opérateurs de comparaison.
+
+||Symbole|
+|-|:-:|
+|Egal à|==|
+|Différent de|!=|
+|Supérieur à|>|
+|Inférieur à|<|
+|Supérieur ou égal à|>=|
+|Inférieur ou égal à|<=|
+
+> **Attention** à ne pas confondre les opérateurs `=` et `==`.
+
+Utilisons ce programme en guise d'exemple pour illustrer tout ça:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char* argv[])
+{
+    int a = 12, b = 18, c = 55, d = 19, e = 9, f = 30;
+
+    // Est-ce a est positif
+    printf("%d", a >= 0);
+
+    // Est-ce que b est supérieur à d ?
+    printf("%d", b > d);
+
+    // Est-ce que c est inférieur à e ?
+    printf("%d", c < e);
+
+    // Est-ce a + b est différent de f ?
+    printf("%d", (a + b) != f);
+
+    // Est-ce que a est pair ?
+    printf("%d", (a % 2) == 0);
+
+    // Est-ce que f est impair ?
+    printf("%d", (f % 2) == 1);
+
+
+    return 0;
+}
+```
+
+Avec le programme précédent, nous avons abordé les opérateurs conditionnels mais ce n'est pas tout, nous pouvons aller plus loin en ne faisant pas seulement qu'afficher les résultats de la comparaison mais en les exploitant à travers une conditions.
+
+Tout d'abord, retenons ce shéma graphique:
+
+```mermaid
+flowchart LR
+D --> C{Condition}
+C -- Vrai --> 1[Instructions] --> F
+C -- Faux --> 2[Autres instructions] --> F
+```
+
+Autrement dit, une condition a deux sorties possible: `vrai` ou `faux` et selon la situation où on se trouve on peut utiliser des branchements pour exécuter des instructions.
+
+D'où la notion de **structures conditionnelles**.
+
+Prenons l'**exemple** où on doit comparer deux valeurs `a` et `b`, nous utiliserons ces structures conditionnelles.
+
+La syntaxe génrale est:
+
+```c
+if (<condition>)
+{
+    // Instructions
+}
+else
+{
+    // autres instructions
+}
+```
+
+Pour notre exemple nous dirons:
+
+```c
+#include <stdio.h>
+
+int main(int argc, char* argc[])
+{
+    int a = 1, b = 2;
+
+    if (a == b)
+    {
+        printf("a est egal à b\n");
+    }
+    else
+    {
+        printf("a est different de b\n");
+    }
+
+    return 0;
+}
+```
+
+Et évidemment, vous pouvez bidouiller ce programme pour tester aussi les autres opérateurs.
+
+### Les opérateurs logiques
+
+Les opérateurs logiques permettent de construire des conditions bien plus complexes qui ne peuvent pas être combinées avec les seuls opérateurs de comparaison.
+
+||Symbole|
+|-|:-:|
+|Et|&&|
+|Ou|\|\||
+|Non|!|
+
+On peut retenir ces tables de vérités:
+
+#### Table de vérité de l'opérateur `ET`
+
+||a|b|a && b|
+|-|-|-|-|
+||0|0|0|
+||0|1|0|
+||1|0|0|
+||1|1|1|
+
+#### Table de vérité de l'opérateur `OU`
+
+||a|b|a \|\| b|
+|-|-|-|-|
+||0|0|0|
+||0|1|1|
+||1|0|1|
+||1|1|1|
+
+#### Table de vérité de l'opérateur `NON`
+
+||a|!a|
+|-|-|-|
+||0|1|
+||1|0|
+
+### A vous maintenant
+
+*  
+
+
 ## Les boucles
+### Base
+
+Lorsqu'il s'impose à notre programme qu'il doit répéter des actions ou effectuer des instructions de manière répétitive, c'est là qu'interviennent les **boucles**.
+
+> Nous dirons qu'une **boucle** une partie du programme qui permet de répéter des intructions tant que la condition n'est pas respectée.
+
+Cette condition est souvent exprimée grâce aux opérateurs conditionnels et/ou logiques.
+
+Par exemple pour afficher de 0 à 10, nous pouvons commencer à 0 et tant qu'on n'atteint pas 10, on affiche le nombre courant et passe au suivant.
+
+Observons ce programme:
+
+```c
+#include <stdio.h>
+
+int main(int argc, char* argc[])
+{
+    int compteur = 0;
+
+    while(compteur <= 10)
+    {
+        printf("%d\n", compteur);
+        compteur += 1;
+    }
+    return 0;
+}
+```
+
+
+### Boucles `while`
+
+Syntaxe:
+
+```c
+while(<condition>)
+{
+    // instruction 1 ;
+    // instruction 2 ;
+    // instruction 3 ;
+    // ...
+}
+```
+
+### Boucles `do...while`
+
+Syntaxe:
+
+```c
+do
+{
+    // instruction 1 ;
+    // instruction 2 ;
+    // instruction 3 ;
+    // ...
+}
+while(<condition>);
+```
+
+### Boucles `for`
+
+Syntaxe:
+
+```c
+for(<initialisation>; <condition>; <incrementation>)
+{
+    // instruction 1 ;
+    // instruction 2 ;
+    // instruction 3 ;
+    // ...
+}
+```
+
+### Exercices
+* Compter de 0 à 100
+* Afficher les n premiers nombres pairs/impairs
+* Table de multiplication d'un nombre n
+* Dessiner un triangle rectangle de hauteur h
+* Dessiner un rectagle de longueur L et de largeur l
+* Supposons que vous vous êtes en train de programmer un jeu vidéo. Nous simulons la boucle principale du jeu. Pouvez-vous modifier le programme pour que le personnage meurs au 7ème tour de la boucle ?
+    ```c
+    #include <stdio.h>
+    #include <time.h>
+
+    int main()
+    {
+        int estVivant = 1;
+
+        while(estVivant)
+        {
+            printf("Le personnage est toujours en vie !\n");
+            sleep(1500);
+        }
+
+        printf("OUPS ! GAME OVER !\n\n");
+    }
+    ```
+
+
 # Notions avancées
 ## Les fonctions
 ## Les tableaux
