@@ -544,5 +544,187 @@ for(<initialisation>; <condition>; <incrementation>)
 
 # Notions avancées
 ## Les fonctions
-## Les tableaux
-## Les pointeurs
+
+### Notions de base
+
+Il arrive parfois des cas où notre code source devient très complexe, alors nous faisons usage des fonctions pour mieux organiser.
+
+Retenons qu'une fonction c'est un ensemble indépendant d'instructions qui permettent de faire une tâche.
+
+Prenons le cas où je dois afficher la table de multiplication.
+
+Affichons la table de multiplication par 7:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int table = 7;
+
+    int i = 1;
+    while( i <= 10)
+    {
+        printf("%d x %d = %d\n", table, i, i * table);
+        i+= 1;
+    }
+
+    return 0;
+}
+```
+
+Pour afficher cette table de multiplication, avons utilisé ce bout de code:
+
+```c
+int table = 7;
+
+int i = 1;
+while( i <= 10)
+{
+    printf("%d x %d = %d\n", table, i, i * table);
+    i+= 1;
+}
+```
+
+Si on extirpe ce bout de code, on se retrouve avec cette fonction main:
+
+```c
+int main()
+{
+
+    return 0;
+}
+```
+
+Nous pouvons créer une fonction qu'on peut appeler: `tableDe7`:
+
+```c
+void tableDe7()
+{
+    int table = 7;
+
+    int i = 1;
+    while( i <= 10)
+    {
+        printf("%d x %d = %d\n", table, i, i * table);
+        i+= 1;
+    }
+}
+```
+
+Il y a deux choses à noter:
+* Cette fonction a un type: `void`, elle ne renvoie rien (on peut dire c'est une procédure)
+* Cette fonction est nommée: `tableDe7`
+* Pour l'utiliser, on peut l'invoquer avec cette instruction:
+    ```c
+    tableDe7();
+    ```
+
+Ainsi, dans notre fonction main, on peut avoir:
+
+```c
+int main()
+{
+    tableDe7();
+    return 0;
+}
+```
+
+Lors de l'exécution de ce programme, lorsque l'ordinateur rencontre l'instruction `tableDe7`, le flux d'exécution saute à la fonction `tableDe7` et toutes les instructions de cette fonction sont exécutées de la première à la dernière puis on revient à la fonction main.
+
+On peut donc appeler cette fonction autant de fois que l'on veut mais il y a un problème: elle ne sait afficher que la table de 7.
+
+On peut programmer une autre fonction qui elle peut afficher la table de n'importe quel nombre positif:
+
+```c
+void tableDe(int n)
+{
+    if (n < 0)
+    {
+        printf("Le nombre doit etre positif\n");
+    }
+    else
+    {
+        int i  = 1;
+        while(i <= 10)
+        {
+            printf("%d x %d = %d\n", table, i, table * i);
+            i = i + 1;
+        }
+    }
+}
+```
+
+Grace à cette fonction, nous pouvons contrôler l'affichage de n'importe quelle table de multiplication. Nous pouvons faire des reserves par rapport au nombre reçu et même, personnaliser l'affichage.
+
+Pour utiliser la fonction, il suffit de l'appeler:
+
+```c
+tableDe(7);
+```
+
+L'avantage c'est qu'on peut aussi donner d'autres valeurs:
+
+```c
+tableDe(5);
+tableDe(10);
+```
+
+Pour l'instant, les fonctions qu'on a ne renvoient pas de valeur.
+
+Nous pouvons également programmer des fonctions qui retournent une valeur.
+
+Prenons un exemple:
+
+Nous voulons écrire une fonction `sumNegatives` qui permet de demander à l'utilisateur des valeurs. Si l'utilisateur saisit 0 alors on arrête la saisie et on renvoie la somme des valeurs négatives qu'il aura saisies.
+
+Voici un programme `main` pour tester le programme:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int sumNegatives()
+{
+    // Le code ici
+}
+
+int main()
+{
+    int sum = 0;
+    printf("Saisissez plusieurs valeurs et 0 pour quitter\n");
+    printf("---------------------------------------------\n\n");
+    sum = sumNegatives();
+    printf("\nLa somme des valeurs négatives saisies est : %d\n\n", sum);
+    return 0;
+}
+
+```
+
+* Là nous avons une fonction qui n'a pas de type `void`, son type est plutôt `int`. Cela veut dire qu'elle doit renvoyer un entier (la somme des entiers négatifs.)
+* Egalement, la fonction n'a pas de paramètres, elle sera donc appelée sans luis passer d'arguments.
+
+Nous allons écrire le code de cette fonction comme suit:
+
+```c
+int sumNegatives()
+{
+    int value = -1;
+    int sum = 0;
+
+    while(value != 0)
+    {
+        printf("Value: ");
+        scanf("%d", &value);
+    }
+
+    return sum;
+}
+```
+
+Voilà, nous avons à peu près exploré les bases sur l'utilisation des fonctions.
+
+### A vous maintenant
+
+Utilisez [ce TP sur les fonction](./tp-functions.pdf) pour mieux comprendre les notions qu'on vient d'expliquer.
