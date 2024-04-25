@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1713873504 source:c:\users\sumptring\onedrive\bureau\mes projets c\jeu de devinette triche\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+

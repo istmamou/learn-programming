@@ -17,6 +17,26 @@ Cependant, avec un petit peu de logique et de perspicacité mais aussi d'origina
 
 En espérant que ces raisons vous motivent assez, rendez-vous à la prochaine section où nous lirons pourquoi vous avez besoin d'comprendre le langage C.
 
+## Projets de cours
+
+|TP|Projet|
+|-|:-:|
+|[Variables](./projects/variables/)|
+|[Echange](./projects/échange/)|
+|[Transport](./projects/transport/)|
+|[Condition 1](./projects/conditions1/)|
+|[Dire bonjour](./projects/DireBonjour/)|Oui|
+|[Calculatrice](./projects/Calculatrice/)|Oui|
+|[Permis](./projects/Permis/)|
+|[Permis v2](./projects/Permi%20V2/)|
+|[Permis v3](./projects/Permi%20V3/)|
+|[Nombres aléatoires](./projects/NombresAléatoires)|
+|[Jeu de devinette](./projects/jeu%20de%20devinette/)|Oui|
+|[Jeu de devinette aleatoire](./projects/jeu%20de%20devinette%20aleatoire/)|Oui|
+|[Jeu de devinette triche](./projects/jeu%20de%20devinette%20triche/)|Oui|
+|[Fonctions](./projects/fonctions/)|
+
+
 # Pourquoi apprendre le langage C ?
 Le langage C est un langage bas niveau comparé à beaucoup d'autres langages. 
 Bas niveau signifie que c'est un langage très proche du niveau des composants électroniques.
@@ -72,7 +92,7 @@ Nous allons donc télécharger et installer l'IDE Code::Blocks muni du compilate
 
 Attention à prendre le fichier qui contient mingw dans le nom car il est muni du compilateur.
 
-> **Lien:** https://www.codeblocks.org/downloads/binaries/
+> **Lien:** ./projects/Calculatrice/www.codeblocks.org/downloads/binaries/
 
 ## Un premier projet
 
